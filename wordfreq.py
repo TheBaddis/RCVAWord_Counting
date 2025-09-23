@@ -1,6 +1,7 @@
 def tokenize(text):
     words = []
-  
+    
+
     for i in text:
         start = 0
         end = 0
@@ -32,8 +33,13 @@ def tokenize(text):
 def countWords(words, stopWords):
     frequencies = {}
     
+    #goes through the list "words" and continues 
+    #if the word is excluded from the list of banned words ("stopWords")
     for word in words:
         if  not word in stopWords:
+            #checks if the word isn't already in the dictionary.
+            #if it isn't then it adds the word with a frequency of: 1.
+            #else it adds 1 to the words frequency value.
             if word not in frequencies:
                 frequencies.setdefault(word, 1)
             else:
@@ -43,24 +49,32 @@ def countWords(words, stopWords):
 
 def printTopMost(frequencies, n):
     wordList = []
-    i = 0
     sortedDict = {}
-    
-    for word,freq in frequencies.items():
-        if n > i:
-            tupWord = (word.ljust(5), freq)
-            wordList.append(tupWord)
-        i += 1
 
+    #puts the words and their corresponding frequency in seperate tuples 
+    #and then the tuples are placed in a list to be sorted
+    for word,freq in frequencies.items():
+        tupWord = (word.ljust(5), freq)
+        wordList.append(tupWord)
+
+    #sorts the list of tuples by size, most frequent first
     sortedList = sorted(wordList, key=lambda x: x[1], reverse=True)
 
-#behöver ta tuples i sortedList och stoppa in i en dict
-
-    for i in sortedList:
-        if word not in frequencies:
-            frequencies.setdefault(word, 1)
-        else:
-            frequencies[word] += 1
+    #removes the bottom most entries in the list as limited by n
+    if n <= 0:
+        sortedList = []
+    else:
+        sortedList = sortedList[:n]
         
-    return sortedDict.items()
-print(printTopMost({"clean":1,"water":2,"drinkable":3}, 3))
+
+    #runs through the sorted list and extracts the values form the tuples
+    #and places them into a new dictionary, that is now sorted!
+    for i in sortedList:
+        sortedDict.setdefault(i[0], i[1])
+    
+    #goes through each item in the sorted dictionary and print the key 
+    #and corresponding value in a table
+    for word,freq in sortedDict.items():
+        print(word.ljust(20), str(freq).rjust(5))
+
+#printTopMost({'text': 9, 'word': 30, 'fiction': 6, 'count': 11, 'counting': 7, 'novel': 6}, 4)
