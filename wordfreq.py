@@ -1,10 +1,13 @@
 def tokenize(text):
     words = []
+  
     for i in text:
         start = 0
         end = 0
         i = i.lower()
+  
         while start < len(i):
+  
             if i[start].isspace():
                 start += 1
                 continue
@@ -23,5 +26,17 @@ def tokenize(text):
             else:
                 words.append(i[start])
                 start += 1
+  
     return words
-#print(tokenize(["This is a simple sentence"]))
+
+def countWords(words, stopWords):
+    frequencies = {}
+    
+    for word in words:
+        if  not word in stopWords:
+            if word not in frequencies:
+                frequencies.setdefault(word, 1)
+            else:
+                frequencies[word] += 1
+
+    return frequencies
