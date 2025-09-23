@@ -40,3 +40,27 @@ def countWords(words, stopWords):
                 frequencies[word] += 1
 
     return frequencies
+
+def printTopMost(frequencies, n):
+    wordList = []
+    i = 0
+    sortedDict = {}
+    
+    for word,freq in frequencies.items():
+        if n > i:
+            tupWord = (word.ljust(5), freq)
+            wordList.append(tupWord)
+        i += 1
+
+    sortedList = sorted(wordList, key=lambda x: x[1], reverse=True)
+
+#behöver ta tuples i sortedList och stoppa in i en dict
+
+    for i in sortedList:
+        if word not in frequencies:
+            frequencies.setdefault(word, 1)
+        else:
+            frequencies[word] += 1
+        
+    return sortedDict.items()
+print(printTopMost({"clean":1,"water":2,"drinkable":3}, 3))
