@@ -5,7 +5,7 @@ def tokenize(documentWithTextLines):
     for line in documentWithTextLines:
         index = 0
 
-        print(f"nu kommer raden:{line}")
+        # print(f"nu kommer raden:{line}")
 
         while (index < len(line)):
             print(line[index])
@@ -14,4 +14,4 @@ def tokenize(documentWithTextLines):
     return words
 
 
-tokenize(["första rad", "andra rad"])
+# tokenize(["första rad", "andra rad"])
