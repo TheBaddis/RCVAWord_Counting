@@ -8,11 +8,9 @@ def main():
     
     stopWords = []
     for stopWord in stop_file:
-        stopWords.append(stopWord.strip().lower())
-    
-    tokens = []
-    for line in inp_file:
-        tokens.extend(wordfreq.tokenize(line))
+        stopWords.append(stopWord.strip("\n").lower())
+                         
+    tokens = wordfreq.tokenize(inp_file)
 
     countedWords = wordfreq.countWords(tokens, stopWords)
 
